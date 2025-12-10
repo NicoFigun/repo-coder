@@ -1,0 +1,250 @@
+/* style.css - Estilos para el sitio web Cafe Loco */
+.logo {
+    height: 80px;
+    /* altura fija*/
+    width: auto;
+    /* El ancho se ajusta solo para mantener la proporción */
+    display: block;
+    /* Lo convertimos en bloque para poder centrarlo */
+    margin-left: auto;
+    /* Centramos la imagen horizontalmente */
+    margin-right: auto;
+    /* Centramos la imagen horizontalmente */
+    border-radius: 50%;
+    /* Hacemos la imagen circular */
+}
+
+/* ------------------*/
+/* Estilos globales (body) */
+/* ------------------*/
+body {
+     font-family: "BBH Sans Hegarty", sans-serif;
+    /*Colores Base*/
+    background-color: #fac37c;
+    color: #333333;
+}
+
+/* ------------------*/
+/* Modificadores de texto */
+/* ------------------*/
+h1,
+h2,
+h3 {
+    /* Fuente para titulos, mas decorativa */
+    font-family: "BBH Sans Hegarty", sans-serif;
+    color: #4a2c2a;
+    /* Color marron oscuro */
+    text-align: center;
+    /*Centrar titulos */
+}
+
+h1 {
+    font-size: 36px
+}
+
+h2 {
+    font-size: 28px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    /* Mejorar legibilidad */
+    text-align: center;
+}
+
+.subtitulo {
+    color: #666;
+    font-size: 18px;
+}
+
+/* ------------------*/
+/* Estilos para el header */
+/* ------------------*/
+header {
+    background-color: #fac37c;
+}
+
+.navegador ul {
+    list-style-type: none;
+    text-align: center;
+    
+}
+
+.navegador li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navegador a {
+    text-decoration: none;
+    color: #4a2c2a;
+    font-weight: bold;
+    /*texto en negrita */
+}
+
+.navegador a:hover {
+    color: #8c5a4f;
+    /* Color mas claro al pasar el mouse */
+}
+
+.link-activo {
+    color: #d9534f;
+    /* Color rojo para el link activo */
+}
+
+
+
+/* ------------------*/
+/* Estilos para el footer */
+/* ------------------*/
+footer {
+    background-color: #4a2c2a;
+    color: #fac37c;
+    text-align: center;
+}
+
+.redes-sociales {
+    list-style-type: none;
+
+}
+
+.redes-sociales li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.redes-sociales a {
+    color: #fac37c;
+    text-decoration: none;
+}
+
+.redes-sociales a:hover {
+    text-decoration: underline;
+}
+
+/*-- ------------------*/
+/* Estilos secciones */
+/* ------------------*/
+.seccion.destacados {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.contenedor-tarjetas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tarjeta-producto {
+    background-color: #ffffff;
+    /* Fondo blanco para la tarjeta */
+    width: 300px;
+    /* Un ancho fijo para cada tarjeta */
+
+    /* (Opcional, pero recomendado) */
+    padding: 15px;
+    /* Espacio interno */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+/* ------------------*/
+/* Estilos imagenes*/
+/* ------------------*/
+
+.imagen-mapa {
+    max-width: 100%;
+    /* Ocupan el ancho, pero no más */
+    height: auto;
+    display: block; 
+    margin-left: auto;
+    /* Centramos */
+    margin-right: auto;
+}
+
+.seccion.hero {
+    background-image: url('../img/banner-cafe.png');
+
+    /* Configuración del fondo */
+    background-size: cover;
+    background-position: center;
+
+    /* Altura (puedes ajustarla) */
+    height: 350px;
+
+    /* Centrado del texto con Flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.seccion.hero h1 {
+    color: #4a2c2a;
+}
+
+.seccion.hero .subtitulo {
+    color: #666;
+}
+
+.tarjeta-imagen {
+    width: 100%;
+    /* La imagen ocupa todo el ancho de su tarjeta */
+    height: auto;
+    border-radius: 5px;
+}
+
+/* ------------------*/
+/* Estilos de listas (pag del menu) */
+/* ------------------*/
+
+.lista-menu,
+.lista-horarios {
+    list-style-type: none;
+    text-align: center;
+}
+
+/*------------------*/
+/*Contacto*/
+/*------------------*/
+.formulario-contacto {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Centrar el formulario */
+    padding: 20px;
+    background-color: #4a2c2a;
+    border-radius: 8px;
+    color: #fac37c;
+}
+
+
+
+/* ------------------------------------*/
+/* --- ESTILOS RESPONSIVOS (CELULAR) ---*/
+/* ------------------------------------*/
+
+/* Cuando la pantalla mida 768px o menos (tablets y celulares)... */
+@media (max-width: 768px) {
+
+
+    .navegador li {
+        display: block; /*link ocupa su propia línea */
+        padding-top: 10px; /* espacio vertical */
+        padding-bottom: 10px;
+    }
+
+    
+    .tarjeta-producto {
+        width: 90%; /* En lugar de 300px fijos, que ocupe el 90% del celular */
+    }
+
+    
+    .seccion.hero {
+        height: 250px; /*ajustada la altura del banner*/
+    }
+}
