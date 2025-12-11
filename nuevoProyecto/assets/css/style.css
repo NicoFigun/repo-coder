@@ -1,20 +1,22 @@
 /* =========================================
-   1. CONFIGURACIÓN BASE Y BOX MODEL
+   1. CONFIGURACIÓN BASE (Variables y Reset)
    ========================================= */
 :root {
-    --primary-color: #e50914;
-    --dark-bg: #141414;
+    --primary-color: #e50914; /* Rojo StreamFlix */
+    --dark-bg: #141414;       /* Fondo Oscuro Principal */
+    --card-bg: #1f1f1f;       /* Fondo de tarjetas */
+    --text-gray: #b3b3b3;     /* Texto secundario */
 }
 
+/* Pisamos estilos de Bootstrap para asegurar el modo oscuro total */
 body {
-    background-color: var(--dark-bg) !important; /* Pisamos a Bootstrap */
+    background-color: var(--dark-bg) !important;
     color: white !important;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita scroll lateral accidental */
 }
 
-/* BOX MODEL: Bootstrap usa border-box por defecto, 
-   pero aquí aseguramos que las imágenes se comporten bien */
+/* Asegura que las imágenes no se deformen dentro de contenedores */
 img {
     max-width: 100%;
     display: block;
@@ -24,9 +26,18 @@ img {
    2. NAVBAR PERSONALIZADO
    ========================================= */
 .main-header {
+    /* Gradiente oscuro para que el texto se lea sobre videos/fotos */
     background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+/* Si el navbar tiene la clase bg-black (en páginas internas), 
+   esto asegura que no tenga conflicto con el gradiente */
+.navbar.bg-black {
+    background: #000000 !important;
+    border-bottom: 1px solid #333;
 }
 
 .logo-text {
@@ -38,19 +49,21 @@ img {
 
 .nav-link {
     font-weight: 500;
+    transition: color 0.3s;
 }
 
+/* Pseudoclase Hover para enlaces */
 .nav-link:hover {
-    color: #b3b3b3 !important; /* Pseudoclase :hover */
+    color: var(--text-gray) !important;
 }
 
 /* =========================================
-   3. HERO SECTION (Fondo y Layout)
+   3. HERO SECTION (Portada Inicio)
    ========================================= */
 .hero {
-    height: 85vh;
+    height: 85vh; /* Ocupa el 85% de la pantalla */
     position: relative;
-    /* Fondo con múltiples capas (Gradientes + Imagen) */
+    /* Fondo con doble gradiente para legibilidad + Imagen */
     background-image: linear-gradient(to top, var(--dark-bg) 10%, transparent 50%),
                       linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 30%), 
                       url('../img/fondo-streamflix.png'); 
@@ -68,55 +81,102 @@ img {
 }
 
 /* =========================================
-   4. GRILLA Y CARDS (CSS GRID + Pseudoclases)
+   4. GRILLA DE PELÍCULAS (CSS Grid)
    ========================================= */
-/* Aquí aplicamos la consigna de GRIDS manualmente, 
-   porque el grid de Bootstrap (.row .col) es muy rígido para pósters */
-
 .movies-grid {
-    display: grid; 
-    /* Esta línea es mágica: crea columnas automáticas según el espacio */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: grid;
+    /* Columnas automáticas: Mínimo 180px, Máximo lo que sobre */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
+    padding-bottom: 40px;
 }
 
 .movie-card {
     border-radius: 4px;
     overflow: hidden;
-    /* Pseudoclase de transición para animar */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    position: relative;
     cursor: pointer;
+    /* Animación suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-img {
     width: 100%;
-    aspect-ratio: 2/3; /* Mantiene proporción de póster */
-    object-fit: cover;
+    aspect-ratio: 2/3; /* Mantiene formato póster siempre */
+    object-fit: cover; /* Recorta la imagen para llenar sin deformar */
 }
 
-/* Pseudoclase :HOVER (Efecto interactivo) */
+/* Efecto al pasar el mouse (Hover) */
 .movie-card:hover {
-    transform: scale(1.1); /* Agrandar */
-    z-index: 2; /* Poner encima */
+    transform: scale(1.1);
+    z-index: 10;
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
 /* =========================================
-   5. AJUSTES RESPONSIVE (MEDIA QUERIES)
+   5. TARJETAS DE SUSCRIPCIÓN (Pricing)
+   ========================================= */
+.pricing-card {
+    background-color: var(--card-bg);
+    border: 1px solid #333;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    height: 100%; /* Iguala alturas */
+}
+
+/* Efecto Hover en las tablas de precio */
+.pricing-card:hover {
+    transform: translateY(-10px); /* Flota hacia arriba */
+    border-color: var(--text-gray);
+}
+
+/* Estilo para la tarjeta destacada */
+.pricing-card.recommended {
+    border: 2px solid var(--primary-color);
+    background-color: #262626;
+    position: relative;
+}
+
+.pricing-card.recommended:hover {
+    transform: scale(1.05); /* Crece un poco más */
+}
+
+.price-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    margin: 15px 0;
+}
+
+.feature-list {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.feature-list li {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    color: #ddd;
+}
+
+/* =========================================
+   6. RESPONSIVE (Celulares)
    ========================================= */
 @media (max-width: 768px) {
     .hero {
-        height: 60vh; /* Más chico en celular */
+        height: 60vh; /* Portada más chica en móvil */
         background-position: center;
-    }
-    
-    .movies-grid {
-        /* Columnas más chicas en móvil */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-        gap: 10px;
     }
 
     .hero-title {
         font-size: 2.5rem;
+    }
+    
+    .movies-grid {
+        /* Tarjetas más pequeñas en móvil para que entren 2 por fila */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+        gap: 10px;
     }
 }
