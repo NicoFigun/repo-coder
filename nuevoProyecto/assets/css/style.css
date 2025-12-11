@@ -1,0 +1,122 @@
+/* =========================================
+   1. CONFIGURACIÓN BASE Y BOX MODEL
+   ========================================= */
+:root {
+    --primary-color: #e50914;
+    --dark-bg: #141414;
+}
+
+body {
+    background-color: var(--dark-bg) !important; /* Pisamos a Bootstrap */
+    color: white !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* BOX MODEL: Bootstrap usa border-box por defecto, 
+   pero aquí aseguramos que las imágenes se comporten bien */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================================
+   2. NAVBAR PERSONALIZADO
+   ========================================= */
+.main-header {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.logo-text {
+    color: var(--primary-color) !important;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #b3b3b3 !important; /* Pseudoclase :hover */
+}
+
+/* =========================================
+   3. HERO SECTION (Fondo y Layout)
+   ========================================= */
+.hero {
+    height: 85vh;
+    position: relative;
+    /* Fondo con múltiples capas (Gradientes + Imagen) */
+    background-image: linear-gradient(to top, var(--dark-bg) 10%, transparent 50%),
+                      linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 30%), 
+                      url('../img/fondo-streamflix.png'); 
+    background-size: cover;
+    background-position: center top;
+}
+
+.hero-title {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-description {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    max-width: 700px;
+}
+
+/* =========================================
+   4. GRILLA Y CARDS (CSS GRID + Pseudoclases)
+   ========================================= */
+/* Aquí aplicamos la consigna de GRIDS manualmente, 
+   porque el grid de Bootstrap (.row .col) es muy rígido para pósters */
+
+.movies-grid {
+    display: grid; 
+    /* Esta línea es mágica: crea columnas automáticas según el espacio */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    border-radius: 4px;
+    overflow: hidden;
+    /* Pseudoclase de transición para animar */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer;
+}
+
+.movie-img {
+    width: 100%;
+    aspect-ratio: 2/3; /* Mantiene proporción de póster */
+    object-fit: cover;
+}
+
+/* Pseudoclase :HOVER (Efecto interactivo) */
+.movie-card:hover {
+    transform: scale(1.1); /* Agrandar */
+    z-index: 2; /* Poner encima */
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* =========================================
+   5. AJUSTES RESPONSIVE (MEDIA QUERIES)
+   ========================================= */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh; /* Más chico en celular */
+        background-position: center;
+    }
+    
+    .movies-grid {
+        /* Columnas más chicas en móvil */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+        gap: 10px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
