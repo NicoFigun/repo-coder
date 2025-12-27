@@ -1,0 +1,29 @@
+@use '../abstracts/_variables' as *;
+
+.main-header {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    padding: 15px 0;
+    transition: background-color 0.3s ease;
+
+    // Nesting: Estilos hijos dentro del padre
+    .navbar.bg-black & { 
+        background: #000000 !important;
+        border-bottom: 1px solid #333;
+    }
+
+    .logo-text {
+        color: $primary-color !important;
+        font-weight: 900;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover { // Pseudoclase con &
+            color: $text-gray !important;
+        }
+    }
+}

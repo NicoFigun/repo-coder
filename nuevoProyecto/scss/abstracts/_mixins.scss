@@ -1,0 +1,13 @@
+// Mixin para Responsive Design
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+// Mixin para Flexbox centrado (Utilidad)
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

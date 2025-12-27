@@ -1,0 +1,24 @@
+// Importar Abstracts (Variables primero siempre)
+@import 'abstracts/_variables';
+@import 'abstracts/_mixins';
+
+// Importar Base
+@import 'base/_reset';
+
+// Importar Layout
+@import 'layout/_hero';
+@import 'layout/_grids';
+
+// Importar Componentes
+@import 'components/_navbar';
+@import 'components/_cards';
+
+// (Opcional) Operador @each para generar clases utilitarias (Requisito SASS avanzado)
+@each $name, $color in $theme-colors {
+    .text-#{$name} {
+        color: $color !important;
+    }
+    .bg-#{$name} {
+        background-color: $color !important;
+    }
+}
