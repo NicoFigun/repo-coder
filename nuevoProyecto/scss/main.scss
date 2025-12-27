@@ -1,19 +1,23 @@
-// Importar Abstracts (Variables primero siempre)
-@import 'abstracts/_variables';
-@import 'abstracts/_mixins';
+// 1. Abstracts (Variables y Mixins)
+// Usamos 'as *' para poder usar las variables sin escribir 'variables.$color'
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
 
-// Importar Base
-@import 'base/_reset';
+// 2. Base
+@use 'base/reset';
 
-// Importar Layout
-@import 'layout/_hero';
-@import 'layout/_grids';
+// 3. Layout
+@use 'layout/hero';
+@use 'layout/grids';
+@use 'layout/footer';
 
-// Importar Componentes
-@import 'components/_navbar';
-@import 'components/_cards';
+// 4. Componentes
+@use 'components/navbar';
+@use 'components/cards';
 
-// (Opcional) Operador @each para generar clases utilitarias (Requisito SASS avanzado)
+
+// 5. Clases Utilitarias (El bucle)
+// Como ya cargamos las variables arriba con 'as *', podemos usar $theme-colors directo
 @each $name, $color in $theme-colors {
     .text-#{$name} {
         color: $color !important;

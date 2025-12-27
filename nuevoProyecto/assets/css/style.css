@@ -1,182 +1,160 @@
-/* =========================================
-   1. CONFIGURACIÓN BASE (Variables y Reset)
-   ========================================= */
-:root {
-    --primary-color: #e50914; /* Rojo StreamFlix */
-    --dark-bg: #141414;       /* Fondo Oscuro Principal */
-    --card-bg: #1f1f1f;       /* Fondo de tarjetas */
-    --text-gray: #b3b3b3;     /* Texto secundario */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Pisamos estilos de Bootstrap para asegurar el modo oscuro total */
 body {
-    background-color: var(--dark-bg) !important;
-    color: white !important;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow-x: hidden; /* Evita scroll lateral accidental */
+  background-color: #141414 !important;
+  color: #ffffff !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Asegura que las imágenes no se deformen dentro de contenedores */
 img {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
-/* =========================================
-   2. NAVBAR PERSONALIZADO
-   ========================================= */
-.main-header {
-    /* Gradiente oscuro para que el texto se lea sobre videos/fotos */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-    padding-top: 15px;
-    padding-bottom: 15px;
-    transition: background-color 0.3s ease;
-}
-
-/* Si el navbar tiene la clase bg-black (en páginas internas), 
-   esto asegura que no tenga conflicto con el gradiente */
-.navbar.bg-black {
-    background: #000000 !important;
-    border-bottom: 1px solid #333;
-}
-
-.logo-text {
-    color: var(--primary-color) !important;
-    font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
-
-.nav-link {
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-/* Pseudoclase Hover para enlaces */
-.nav-link:hover {
-    color: var(--text-gray) !important;
-}
-
-/* =========================================
-   3. HERO SECTION (Portada Inicio)
-   ========================================= */
 .hero {
-    height: 85vh; /* Ocupa el 85% de la pantalla */
-    position: relative;
-    /* Fondo con doble gradiente para legibilidad + Imagen */
-    background-image: linear-gradient(to top, var(--dark-bg) 10%, transparent 50%),
-                      linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 30%), 
-                      url('../img/fondo-streamflix.png'); 
-    background-size: cover;
-    background-position: center top;
+  height: 85vh;
+  position: relative;
+  background-image: linear-gradient(to top, #141414 10%, transparent 50%), linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 30%), url("../img/fondo-streamflix.png");
+  background-size: cover;
+  background-position: center top;
 }
-
-.hero-title {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.hero-description {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    max-width: 700px;
-}
-
-/* =========================================
-   4. GRILLA DE PELÍCULAS (CSS Grid)
-   ========================================= */
-.movies-grid {
-    display: grid;
-    /* Columnas automáticas: Mínimo 180px, Máximo lo que sobre */
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding-bottom: 40px;
-}
-
-.movie-card {
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    /* Animación suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie-img {
-    width: 100%;
-    aspect-ratio: 2/3; /* Mantiene formato póster siempre */
-    object-fit: cover; /* Recorta la imagen para llenar sin deformar */
-}
-
-/* Efecto al pasar el mouse (Hover) */
-.movie-card:hover {
-    transform: scale(1.1);
-    z-index: 10;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
-/* =========================================
-   5. TARJETAS DE SUSCRIPCIÓN (Pricing)
-   ========================================= */
-.pricing-card {
-    background-color: var(--card-bg);
-    border: 1px solid #333;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    height: 100%; /* Iguala alturas */
-}
-
-/* Efecto Hover en las tablas de precio */
-.pricing-card:hover {
-    transform: translateY(-10px); /* Flota hacia arriba */
-    border-color: var(--text-gray);
-}
-
-/* Estilo para la tarjeta destacada */
-.pricing-card.recommended {
-    border: 2px solid var(--primary-color);
-    background-color: #262626;
-    position: relative;
-}
-
-.pricing-card.recommended:hover {
-    transform: scale(1.05); /* Crece un poco más */
-}
-
-.price-text {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: white;
-    margin: 15px 0;
-}
-
-.feature-list {
-    text-align: left;
-    margin: 20px 0;
-    padding-left: 0;
-    list-style: none;
-}
-
-.feature-list li {
-    margin-bottom: 12px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 8px;
-    color: #ddd;
-}
-
-/* =========================================
-   6. RESPONSIVE (Celulares)
-   ========================================= */
 @media (max-width: 768px) {
-    .hero {
-        height: 60vh; /* Portada más chica en móvil */
-        background-position: center;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .movies-grid {
-        /* Tarjetas más pequeñas en móvil para que entren 2 por fila */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-        gap: 10px;
-    }
+  .hero {
+    height: 60vh;
+    background-position: center;
+  }
 }
+.hero-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}
+.hero-description {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  max-width: 700px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding-bottom: 40px;
+}
+@media (max-width: 768px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+}
+
+.main-header {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+  padding: 15px 0;
+  transition: background-color 0.3s ease;
+}
+.navbar.bg-black .main-header {
+  background: #000000 !important;
+  border-bottom: 1px solid #333;
+}
+.main-header .logo-text {
+  color: #e50914 !important;
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+.main-header .nav-link {
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.main-header .nav-link:hover {
+  color: #b3b3b3 !important;
+}
+
+/* --- Movie Cards --- */
+.movie-card {
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.movie-card .movie-img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.movie-card:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Pricing Cards --- */
+.pricing-card {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  height: 100%;
+}
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: #b3b3b3;
+}
+.pricing-card.recommended {
+  border: 2px solid #e50914;
+  background-color: rgb(43.75, 43.75, 43.75);
+}
+.pricing-card.recommended:hover {
+  transform: scale(1.05);
+}
+.pricing-card .price-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 15px 0;
+}
+.pricing-card .feature-list {
+  text-align: left;
+  margin: 20px 0;
+  list-style: none;
+  padding: 0;
+}
+.pricing-card .feature-list li {
+  margin-bottom: 12px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+  color: #b8b8b8;
+}
+
+.text-primary {
+  color: #e50914 !important;
+}
+
+.bg-primary {
+  background-color: #e50914 !important;
+}
+
+.text-dark {
+  color: #141414 !important;
+}
+
+.bg-dark {
+  background-color: #141414 !important;
+}
+
+.text-light {
+  color: #ffffff !important;
+}
+
+.bg-light {
+  background-color: #ffffff !important;
+}/*# sourceMappingURL=main.css.map */
